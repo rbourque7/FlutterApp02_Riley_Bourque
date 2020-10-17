@@ -9,39 +9,60 @@ class _MyFirstPageState extends State<MyFirstPage> {
   bool _enabled = false;
   String _msg1 = '';
   String _msg2 = '';
+  int num1 = 0;
 
   @override
   Widget build(BuildContext context) {
     Object onPressed1() {
       if (_enabled) {
         setState(() {
-          _msg1 = 'Enabled';
+          if (num1 != 0) 
+          {
+            _msg1 = 'Clicked' + ' $num1';
+          } 
+          else {
+            _msg1 = 'Click Me';
+          }                  
         });
-        print('onPressed1 returning address of anon func but NOT running it');
+        print('Showing Click Button');
         return () {
-          print('Anon func now running as button pressed');
+          num1++;
+          _msg1 = 'Clicked' + ' $num1'; 
+          print('Adding a click');        
         };
       } else {
         setState(() {
           _msg1 = '';
+          _msg2 = '';
         });
         print('onPressed1 returning NULL');
         return null;
       }
     }
 
-    //Object onPressed2() {
-      //if (_enabled) {
-        //print(
-            //'onPressed2 returning the result of running the anonymous function');
-        //return () {
-         // print('Anon func now running');
-        //}();
-     // } else {
-        //print('onPressed2 returning NULL');
-       // return null;
-      //}
-   // }
+    Object onPressed2() {
+      if (_enabled) {
+        setState(() {
+          _msg2 = 'Reset';
+          print('Showing Reset Button');
+        });        
+        return () {
+          num1 = 0;
+          print('ressetting clicks');
+          if (num1 == 0)
+          {
+            _msg1 = 'Click Me';
+          }
+        };
+      } else {
+        setState(() {
+          _msg1 = '';
+          _msg2 = '';
+        });
+        print('onPressed1 returning NULL');
+        return null;
+      }
+    }
 
     print('The build is being RUN');
 
@@ -62,16 +83,10 @@ class _MyFirstPageState extends State<MyFirstPage> {
                       print('onChangedValue is $onChangedValue');
                       _enabled = onChangedValue;
                       setState(() {
-                        if (_enabled) {
-                          _msg1 = 'Click Me';
-                          print('_Click Me is true');
-                          _msg2 = 'Reset';
-                          print('_Reset is true');
-                        } else {
-                          _msg1 = '';
+                        if (_enabled) {                         
+                          print('_enabled is true');
+                        } else {                         
                           print('_enabled is false');
-                          _msg2 = '';
-                          print('_Reset is false');
                         }
                       });
                     }),
@@ -91,22 +106,22 @@ class _MyFirstPageState extends State<MyFirstPage> {
                     highlightColor: Colors.blue,
                     splashColor: Colors.green.shade300,
                     padding: EdgeInsets.all(20.0),
-                    onPressed: onPressed1(),
+                    onPressed: onPressed1(),                    
                     child: Text(_msg1),
                   ),
                 ),
-                 Container(
+                Container(
                   margin: EdgeInsets.all(20),
                   child: MaterialButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                     elevation: 8,
-                    textColor: Colors.blue,
-                    color: Colors.redAccent,
+                    textColor: Colors.white,
+                    color: Colors.blue,
                     highlightColor: Colors.blue,
-                    splashColor: Colors.white,
+                    splashColor: Colors.green.shade300,
                     padding: EdgeInsets.all(20.0),
-                    onPressed: onPressed1(),
+                    onPressed: onPressed2(),
                     child: Text(_msg2),
                   ),
                 ),
