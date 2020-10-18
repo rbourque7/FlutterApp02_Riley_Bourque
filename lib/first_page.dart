@@ -27,8 +27,10 @@ class _MyFirstPageState extends State<MyFirstPage> {
         print('Showing Click Button');
         return () {
           num1++;
+          print('Adding a click');
+          setState(() {
           _msg1 = 'Clicked' + ' $num1'; 
-          print('Adding a click');        
+        });        
         };
       } else {
         setState(() {
@@ -59,7 +61,7 @@ class _MyFirstPageState extends State<MyFirstPage> {
           _msg1 = '';
           _msg2 = '';
         });
-        print('onPressed1 returning NULL');
+        print('onPressed2 returning NULL');
         return null;
       }
     }
