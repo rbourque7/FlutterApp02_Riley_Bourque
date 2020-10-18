@@ -49,12 +49,14 @@ class _MyFirstPageState extends State<MyFirstPage> {
           print('Showing Reset Button');
         });        
         return () {
-          num1 = 0;
           print('ressetting clicks');
+          setState(() {
+          num1 = 0;
           if (num1 == 0)
           {
             _msg1 = 'Click Me';
           }
+        });    
         };
       } else {
         setState(() {
